@@ -14,7 +14,7 @@ export const ForgotPasswordPage: React.FC = () => {
 
   const newPassword = watch('newPassword');
 
-  const onEmailSubmit = (error) => {
+  const onEmailSubmit = () => {
     setIsLoading(true);
     setErrorMsg('');
     setTimeout(() => {
@@ -37,7 +37,7 @@ export const ForgotPasswordPage: React.FC = () => {
     }, 1000);
   };
 
-  const onResetSubmit = (error) => {
+  const onResetSubmit = () => {
     setIsLoading(true);
     setErrorMsg('');
     setTimeout(() => {
