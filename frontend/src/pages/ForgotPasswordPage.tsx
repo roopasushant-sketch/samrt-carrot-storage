@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMail, FiArrowLeft, FiCheckCircle, FiKey, FiLock, FiAlertCircle } from 'react-icons/fi';
 
@@ -11,10 +11,10 @@ export const ForgotPasswordPage: React.FC = () => {
   const [step, setStep] = useState<Step>('email');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  
+
   const newPassword = watch('newPassword');
 
-  const onEmailSubmit = (data: any) => {
+  const onEmailSubmit = (error) => {
     setIsLoading(true);
     setErrorMsg('');
     setTimeout(() => {
@@ -37,7 +37,7 @@ export const ForgotPasswordPage: React.FC = () => {
     }, 1000);
   };
 
-  const onResetSubmit = (data: any) => {
+  const onResetSubmit = (error) => {
     setIsLoading(true);
     setErrorMsg('');
     setTimeout(() => {
@@ -47,7 +47,7 @@ export const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="glass-panel p-8 rounded-2xl w-full"
@@ -74,7 +74,7 @@ export const ForgotPasswordPage: React.FC = () => {
 
       <AnimatePresence mode="wait">
         {step === 'email' && (
-          <motion.form 
+          <motion.form
             key="email"
             initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
             onSubmit={handleSubmit(onEmailSubmit)} className="space-y-5"
@@ -83,9 +83,9 @@ export const ForgotPasswordPage: React.FC = () => {
               <label className="block text-sm font-medium mb-2">Email Address</label>
               <div className="relative">
                 <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input 
+                <input
                   {...register('email', { required: 'Email is required' })}
-                  type="email" 
+                  type="email"
                   placeholder="john@example.com"
                   className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-slate-900/50 focus:ring-2 focus:ring-primary-500 outline-none transition-all"
                 />
@@ -102,7 +102,7 @@ export const ForgotPasswordPage: React.FC = () => {
         )}
 
         {step === 'otp' && (
-          <motion.form 
+          <motion.form
             key="otp"
             initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
             onSubmit={handleSubmit(onOtpSubmit)} className="space-y-5"
@@ -111,9 +111,9 @@ export const ForgotPasswordPage: React.FC = () => {
               <label className="block text-sm font-medium mb-2">One-Time Password (OTP)</label>
               <div className="relative">
                 <FiKey className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input 
+                <input
                   {...register('otp', { required: 'OTP is required', minLength: { value: 6, message: 'OTP must be 6 digits' } })}
-                  type="text" 
+                  type="text"
                   maxLength={6}
                   placeholder="123456"
                   className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-slate-900/50 focus:ring-2 focus:ring-primary-500 outline-none transition-all tracking-widest text-lg font-mono"
@@ -132,7 +132,7 @@ export const ForgotPasswordPage: React.FC = () => {
         )}
 
         {step === 'reset' && (
-          <motion.form 
+          <motion.form
             key="reset"
             initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
             onSubmit={handleSubmit(onResetSubmit)} className="space-y-5"
@@ -141,9 +141,9 @@ export const ForgotPasswordPage: React.FC = () => {
               <label className="block text-sm font-medium mb-2">New Password</label>
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input 
+                <input
                   {...register('newPassword', { required: 'Password is required', minLength: { value: 6, message: 'Minimum 6 characters' } })}
-                  type="password" 
+                  type="password"
                   placeholder="••••••••"
                   className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-slate-900/50 focus:ring-2 focus:ring-primary-500 outline-none transition-all"
                 />
@@ -155,12 +155,12 @@ export const ForgotPasswordPage: React.FC = () => {
               <label className="block text-sm font-medium mb-2">Confirm New Password</label>
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input 
-                  {...register('confirmNewPassword', { 
+                <input
+                  {...register('confirmNewPassword', {
                     required: 'Please confirm password',
                     validate: value => value === newPassword || 'Passwords do not match'
                   })}
-                  type="password" 
+                  type="password"
                   placeholder="••••••••"
                   className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-slate-900/50 focus:ring-2 focus:ring-primary-500 outline-none transition-all"
                 />
@@ -177,7 +177,7 @@ export const ForgotPasswordPage: React.FC = () => {
         )}
 
         {step === 'success' && (
-          <motion.div 
+          <motion.div
             key="success"
             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
             className="text-center"

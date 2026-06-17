@@ -3,11 +3,11 @@
 #include <WiFi.h>
 
 // Wi-Fi Credentials
-const char *ssid = "STUDENT";
-const char *password = "S";
+const char *ssid = "vivo Y28 5G";
+const char *password = "123456780";
 
 // Backend API Endpoint
-const char *serverUrl = "http://192.168.24.157:5000/api/sensor/data";
+const char *serverUrl = "http://10.178.100.169:5000/api/sensor/data";
 
 // GPIO Pins
 const int RELAY_PIN = 12;
